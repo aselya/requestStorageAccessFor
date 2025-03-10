@@ -7,7 +7,7 @@
   <meta content="Bikeshed version 4b8aed3f7, updated Thu Mar 6 12:35:01 2025 -0800" name="generator">
   <link href="https://github.com/privacycg/requestStorageAccessFor" rel="canonical">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="cc10534ae86efeb426eb677013757f894d51dee4" name="revision">
+  <meta content="04bfc719423942249a7d00494f070c81bdd3fd0f" name="revision">
   <meta content="dark light" name="color-scheme">
   <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
@@ -891,7 +891,7 @@ to unpartitioned cookies on behalf of another <a data-link-type="dfn" href="http
             <p>If <var>state</var> is <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-granted" id="ref-for-dfn-granted">granted</a>:</p>
             <ol>
              <li data-md>
-              <p>Set <var>global</var>’s <a data-link-type="dfn">has storage access</a> to true.</p>
+              <p>Set <var>global</var>’s <a data-link-type="dfn" href="https://privacycg.github.io/storage-access/#environment-has-storage-access" id="ref-for-environment-has-storage-access">has storage access</a> to true.</p>
              <li data-md>
               <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#resolve" id="ref-for-resolve①">Resolve</a> <var>p</var> with <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-idl-undefined①">undefined</a></code>.</p>
             </ol>
@@ -906,7 +906,7 @@ to unpartitioned cookies on behalf of another <a data-link-type="dfn" href="http
           </ol>
         </ol>
        <li data-md>
-        <p>Let <var>explicitSetting</var> be the result of <a data-link-type="dfn">determining whether the user agent explicitly allows unpartitioned cookie access</a> with (<var>topLevelSite</var>, <var>embeddedSite</var>).</p>
+        <p>Let <var>explicitSetting</var> be the result of <a data-link-type="dfn" href="https://privacycg.github.io/storage-access/#determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access" id="ref-for-determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access">determine whether the user agent explicitly allows unpartitioned cookie access</a> with (<var>topLevelSite</var>, <var>embeddedSite</var>).</p>
        <li data-md>
         <p>If <var>explicitSetting</var> is "<code>disallow</code>":</p>
         <ol>
@@ -953,10 +953,10 @@ to unpartitioned cookies on behalf of another <a data-link-type="dfn" href="http
           <p>Abort these steps.</p>
         </ol>
        <li data-md>
-        <p>Let <var>connected</var> be the result of <a data-link-type="dfn">determining the effective FedCM connection status</a> given <var>topLevelOrigin</var>, <var>embeddedOrigin</var>, <var>doc</var>.</p>
+        <p>Let <var>connected</var> be the result of <a data-link-type="dfn" href="https://w3c-fedid.github.io/FedCM/#determine-the-fedcm-site-connection-status" id="ref-for-determine-the-fedcm-site-connection-status">determining the effective FedCM connection status</a> given <var>topLevelOrigin</var>, <var>embeddedOrigin</var>, <var>doc</var>.</p>
        <li data-md>
         <p>If <var>connected</var>:</p>
-        <p class="note" role="note"><span class="marker">NOTE:</span> User agents are encouraged to keep track of which (site, site) tuples have been allowed to access storage due to existing FedCM connections, and double-check that list when accessing cookies to catch malicious attackers that have tricked an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment" id="ref-for-environment">environment</a> into using an incorrect <a data-link-type="dfn">has storage access</a> bit.</p>
+        <p class="note" role="note"><span class="marker">NOTE:</span> User agents are encouraged to keep track of which (site, site) tuples have been allowed to access storage due to existing FedCM connections, and double-check that list when accessing cookies to catch malicious attackers that have tricked an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment" id="ref-for-environment">environment</a> into using an incorrect <a data-link-type="dfn" href="https://privacycg.github.io/storage-access/#environment-has-storage-access" id="ref-for-environment-has-storage-access①">has storage access</a> bit.</p>
         <ol>
          <li data-md>
           <p>Run <var>process permission state</var> with <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-granted" id="ref-for-dfn-granted④">granted</a>.</p>
@@ -983,13 +983,13 @@ to unpartitioned cookies on behalf of another <a data-link-type="dfn" href="http
      In <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#http-network-or-cache-fetch" id="ref-for-http-network-or-cache-fetch">http network or cache fetch</a>, when determining whether to block cookies, run the following algorithm. A true result means cookies can be unblocked: 
     <ol>
      <li data-md>
-      <p>Let <var>has top-level access</var> be the result of running <a data-link-type="dfn">determine if a request has top-level storage access</a> on <var>request</var>.</p>
+      <p>Let <var>has storage access</var> be the result of running <a data-link-type="dfn" href="https://privacycg.github.io/storage-access-headers/#perform-a-storage-access-retry-check" id="ref-for-perform-a-storage-access-retry-check">storage access headers retry check</a> on <var>request</var>.</p>
      <li data-md>
-      <p>If <var>has top-level access</var> is false, return false.</p>
+      <p>If <var>has storage access</var> is false, return false.</p>
      <li data-md>
       <p>Let <var>is subresource</var> be true if <var>request</var> is a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#subresource-request" id="ref-for-subresource-request">subresource request</a> and false otherwise.</p>
      <li data-md>
-      <p>Let <var>allowed subresource mode</var> be true if <var>request</var>’s <a data-link-type="dfn">storage access status</a> is "<code><a data-link-type="dfn">active</a></code>", and false otherwise.</p>
+      <p>Let <var>allowed subresource mode</var> be true if <var>request</var>’s <a data-link-type="dfn" href="https://privacycg.github.io/storage-access-headers/#storage-access-status" id="ref-for-storage-access-status">storage access status</a> is "<code><a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#extendableevent-active" id="ref-for-extendableevent-active">active</a></code>", and false otherwise.</p>
      <li data-md>
       <p>If <var>is subresource</var> is true and <var>allowed subresource mode</var> is false, return false.</p>
      <li data-md>
@@ -1004,14 +1004,6 @@ to unpartitioned cookies on behalf of another <a data-link-type="dfn" href="http
    <p><code class="idl"><a data-link-type="idl" href="https://privacycg.github.io/storage-access/#dom-document-requeststorageaccess" id="ref-for-dom-document-requeststorageaccess">requestStorageAccess()</a></code> requires interaction with an embedded document. By requiring interaction only with the top-level document, <code class="idl"><a data-link-type="idl" href="#dom-document-requeststorageaccessfor" id="ref-for-dom-document-requeststorageaccessfor⑥">requestStorageAccessFor(requestedOrigin)</a></code> lowers the bar for a potential prompt, though embedded documents can also be quite prominent (or use other techniques to get user interaction). <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementation-defined" id="ref-for-implementation-defined">Implementation-defined</a> acceptance and rejection steps are intended to allow user agents to reject abusive requests based on logic they see fit.
 The prompts used have to be careful to indicate the direction of the request, such that the user is able to understand who is requesting access.</p>
    <p>As with <code class="idl"><a data-link-type="idl" href="https://privacycg.github.io/storage-access/#dom-document-requeststorageaccess" id="ref-for-dom-document-requeststorageaccess①">requestStorageAccess()</a></code>, the same tension between user consent and prompt fatigue exists with <code class="idl"><a data-link-type="idl" href="#dom-document-requeststorageaccessfor" id="ref-for-dom-document-requeststorageaccessfor⑦">requestStorageAccessFor(requestedOrigin)</a></code>; much like the Storage Access API, <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#implementation-defined" id="ref-for-implementation-defined①">implementation-defined</a> acceptance and rejection steps are intended to enable implementers with differing stances on this question to make compromises as they see fit.</p>
-   <p>Another difference is that queries for the permission can be more sensitive, depending on the context. Note that a frame has to be unable to request the state of either of:</p>
-   <ul>
-    <li data-md>
-     <p>Whether it was <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-granted" id="ref-for-dfn-granted⑤">granted</a> a "<a class="idl-code" data-link-type="permission" href="https://privacycg.github.io/requestStorageAccessFor/#permissiondef-top-level-storage-access" id="ref-for-permissiondef-top-level-storage-access"><code>top-level-storage-access</code></a>" permission for some origin while a top-level document.</p>
-    <li data-md>
-     <p>Whether arbitrary other origins were <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-granted" id="ref-for-dfn-granted⑥">granted</a> the "<a class="idl-code" data-link-type="permission" href="https://privacycg.github.io/requestStorageAccessFor/#permissiondef-top-level-storage-access" id="ref-for-permissiondef-top-level-storage-access①"><code>top-level-storage-access</code></a>" on the current top-level site.</p>
-   </ul>
-   <p>In the former case, this would allow bogus domains (or combinations thereof) to be used as identifiers; in the latter case, it would reveal state under unrelated origins.</p>
    <h2 class="heading settled" data-level="7" id="security"><span class="secno">7. </span><span class="content">Security considerations</span><a class="self-link" href="#security"></a></h2>
    <p>It is important that <code class="idl"><a data-link-type="idl" href="#dom-document-requeststorageaccessfor" id="ref-for-dom-document-requeststorageaccessfor⑧">requestStorageAccessFor(requestedOrigin)</a></code> not degrade security properties of the web platform, even when compared to post-removal of cross-site cookies.
 Third-party cookie removal <a href="https://docs.google.com/document/d/1AsrETl-7XvnZNbG81Zy9BcZfKbqACQYBSrjM3VsIpjY/edit">has potential benefits for security</a>, specifically in mitigating attacks that rely upon authenticated requests, e.g. CSRF.
@@ -1025,7 +1017,7 @@ For frame access, <code class="idl"><a data-link-type="idl" href="#dom-document-
     <li data-md>
      <p>Any cookies included with the subresource request have to be explicitly marked <code>SameSite=None</code>, indicating intent for use in <a data-link-type="dfn" href="#third-party-context" id="ref-for-third-party-context①">third party contexts</a>.</p>
     <li data-md>
-     <p>For any <code>SameSite=None</code> cookies to be included, the request’s <a data-link-type="dfn">storage access status</a> must be "<code><a data-link-type="dfn">active</a></code>".</p>
+     <p>For any <code>SameSite=None</code> cookies to be included, the request’s <a data-link-type="dfn" href="https://privacycg.github.io/storage-access-headers/#storage-access-status" id="ref-for-storage-access-status①">storage access status</a> must be "<code><a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#extendableevent-active" id="ref-for-extendableevent-active①">active</a></code>".</p>
    </ul>
    <p>Additionally, only requests initiated from the top-level document will be eligible for inclusion of <code>SameSite=None</code> cookies. This ensures that other embedded frames do not receive escalated privileges.</p>
    <h3 class="heading settled" data-level="7.2" id="notification-abuse"><span class="secno">7.2. </span><span class="content">Notification Abuse</span><a class="self-link" href="#notification-abuse"></a></h3>
@@ -1078,6 +1070,11 @@ For frame access, <code class="idl"><a data-link-type="idl" href="#dom-document-
     <ul>
      <li><span class="dfn-paneled" id="85394472">Document</span>
      <li><span class="dfn-paneled" id="c62cd7cf">origin</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[FEDCM-1]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="59ee7103">determining the effective FedCM connection status</span>
     </ul>
    <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
@@ -1138,15 +1135,23 @@ For frame access, <code class="idl"><a data-link-type="idl" href="#dom-document-
      <li><span class="dfn-paneled" id="d357c753">requesting permission to use</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[REQUESTSTORAGEACCESSFOR]</a> defines the following terms:
+    <a data-link-type="biblio">[SERVICE-WORKERS]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="8a99da8e">top-level-storage-access</span>
+     <li><span class="dfn-paneled" id="e2a51d55">active</span>
     </ul>
    <li>
     <a data-link-type="biblio">[STORAGE-ACCESS]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="f6b9fd3a">determine whether the user agent explicitly allows unpartitioned cookie access</span>
+     <li><span class="dfn-paneled" id="0b77b39d">has storage access</span>
      <li><span class="dfn-paneled" id="aa7820f7">requestStorageAccess()</span>
      <li><span class="dfn-paneled" id="1eb9711e">sandbox storage access by user activation flag</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[STORAGE-ACCESS-HEADERS]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="b065315c">storage access headers retry check</span>
+     <li><span class="dfn-paneled" id="564de741">storage access status</span>
     </ul>
    <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
@@ -1173,6 +1178,8 @@ For frame access, <code class="idl"><a data-link-type="idl" href="#dom-document-
   <dl>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+   <dt id="biblio-fedcm-1">[FEDCM-1]
+   <dd>Nicolas Pena Moreno. <a href="https://w3c-fedid.github.io/FedCM/"><cite>Federated Credential Management API</cite></a>. URL: <a href="https://w3c-fedid.github.io/FedCM/">https://w3c-fedid.github.io/FedCM/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-html">[HTML]
@@ -1181,10 +1188,10 @@ For frame access, <code class="idl"><a data-link-type="idl" href="#dom-document-
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-permissions">[PERMISSIONS]
    <dd>Marcos Caceres; Mike Taylor. <a href="https://w3c.github.io/permissions/"><cite>Permissions</cite></a>. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
-   <dt id="biblio-requeststorageaccessfor">[REQUESTSTORAGEACCESSFOR]
-   <dd><a href="https://privacycg.github.io/requestStorageAccessFor/"><cite>requestStorageAccessFor API</cite></a>. Editor's Draft. URL: <a href="https://privacycg.github.io/requestStorageAccessFor/">https://privacycg.github.io/requestStorageAccessFor/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+   <dt id="biblio-service-workers">[SERVICE-WORKERS]
+   <dd>Yoshisato Yanagisawa; Monica CHINTALA. <a href="https://w3c.github.io/ServiceWorker/"><cite>Service Workers</cite></a>. URL: <a href="https://w3c.github.io/ServiceWorker/">https://w3c.github.io/ServiceWorker/</a>
    <dt id="biblio-storage-access">[STORAGE-ACCESS]
    <dd><a href="https://privacycg.github.io/storage-access/"><cite>Storage Access API</cite></a>. CG Draft. URL: <a href="https://privacycg.github.io/storage-access/">https://privacycg.github.io/storage-access/</a>
    <dt id="biblio-url">[URL]
@@ -1403,6 +1410,7 @@ function parseHTML(markup) {
 {
 let dfnPanelData = {
 "086e3aff": {"dfnID":"086e3aff","dfnText":"origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-origin"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-concept-origin\u2460"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-concept-origin\u2461"}],"title":"3.1. Changes to Document"},{"refs":[{"id":"ref-for-concept-origin\u2462"}],"title":"5. Fetch Integration"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#concept-origin"},
+"0b77b39d": {"dfnID":"0b77b39d","dfnText":"has storage access","external":true,"refSections":[{"refs":[{"id":"ref-for-environment-has-storage-access"},{"id":"ref-for-environment-has-storage-access\u2460"}],"title":"3.1. Changes to Document"}],"url":"https://privacycg.github.io/storage-access/#environment-has-storage-access"},
 "0e3ba9f8": {"dfnID":"0e3ba9f8","dfnText":"fully active","external":true,"refSections":[{"refs":[{"id":"ref-for-fully-active"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active"},
 "13dd6cae": {"dfnID":"13dd6cae","dfnText":"node navigable","external":true,"refSections":[{"refs":[{"id":"ref-for-node-navigable"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable"},
 "1eb9711e": {"dfnID":"1eb9711e","dfnText":"sandbox storage access by user activation flag","external":true,"refSections":[{"refs":[{"id":"ref-for-sandbox-storage-access-by-user-activation-flag"}],"title":"3.1. Changes to Document"}],"url":"https://privacycg.github.io/storage-access/#sandbox-storage-access-by-user-activation-flag"},
@@ -1418,11 +1426,13 @@ let dfnPanelData = {
 "47fe679e": {"dfnID":"47fe679e","dfnText":"transient activation","external":true,"refSections":[{"refs":[{"id":"ref-for-transient-activation"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/interaction.html#transient-activation"},
 "48438eb3": {"dfnID":"48438eb3","dfnText":"queue a global task","external":true,"refSections":[{"refs":[{"id":"ref-for-queue-a-global-task"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task"},
 "49b06815": {"dfnID":"49b06815","dfnText":"http network or cache fetch","external":true,"refSections":[{"refs":[{"id":"ref-for-http-network-or-cache-fetch"}],"title":"5. Fetch Integration"}],"url":"https://fetch.spec.whatwg.org/#http-network-or-cache-fetch"},
+"564de741": {"dfnID":"564de741","dfnText":"storage access status","external":true,"refSections":[{"refs":[{"id":"ref-for-storage-access-status"}],"title":"5. Fetch Integration"},{"refs":[{"id":"ref-for-storage-access-status\u2460"}],"title":"7.1. Subresource Requests"}],"url":"https://privacycg.github.io/storage-access-headers/#storage-access-status"},
+"59ee7103": {"dfnID":"59ee7103","dfnText":"determining the effective FedCM connection status","external":true,"refSections":[{"refs":[{"id":"ref-for-determine-the-fedcm-site-connection-status"}],"title":"3.1. Changes to Document"}],"url":"https://w3c-fedid.github.io/FedCM/#determine-the-fedcm-site-connection-status"},
 "5d7209e9": {"dfnID":"5d7209e9","dfnText":"Window","external":true,"refSections":[{"refs":[{"id":"ref-for-window"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/nav-history-apis.html#window"},
 "5f90bbfb": {"dfnID":"5f90bbfb","dfnText":"undefined","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-undefined"},{"id":"ref-for-idl-undefined\u2460"}],"title":"3.1. Changes to Document"}],"url":"https://webidl.spec.whatwg.org/#idl-undefined"},
 "602b1a68": {"dfnID":"602b1a68","dfnText":"obtain a site","external":true,"refSections":[{"refs":[{"id":"ref-for-obtain-a-site"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#obtain-a-site"},
 "65181da8": {"dfnID":"65181da8","dfnText":"secure context","external":true,"refSections":[{"refs":[{"id":"ref-for-secure-context"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
-"6821ab89": {"dfnID":"6821ab89","dfnText":"granted","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-granted"},{"id":"ref-for-dfn-granted\u2460"},{"id":"ref-for-dfn-granted\u2461"},{"id":"ref-for-dfn-granted\u2462"},{"id":"ref-for-dfn-granted\u2463"}],"title":"3.1. Changes to Document"},{"refs":[{"id":"ref-for-dfn-granted\u2464"},{"id":"ref-for-dfn-granted\u2465"}],"title":"6. Privacy considerations"}],"url":"https://w3c.github.io/permissions/#dfn-granted"},
+"6821ab89": {"dfnID":"6821ab89","dfnText":"granted","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-granted"},{"id":"ref-for-dfn-granted\u2460"},{"id":"ref-for-dfn-granted\u2461"},{"id":"ref-for-dfn-granted\u2462"},{"id":"ref-for-dfn-granted\u2463"}],"title":"3.1. Changes to Document"}],"url":"https://w3c.github.io/permissions/#dfn-granted"},
 "6c2d7879": {"dfnID":"6c2d7879","dfnText":"powerful feature","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-powerful-feature"}],"title":"4. Permissions Integration"}],"url":"https://w3c.github.io/permissions/#dfn-powerful-feature"},
 "7393da89": {"dfnID":"7393da89","dfnText":"same origin","external":true,"refSections":[{"refs":[{"id":"ref-for-same-origin"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#same-origin"},
 "77b4c09a": {"dfnID":"77b4c09a","dfnText":"assert","external":true,"refSections":[{"refs":[{"id":"ref-for-assert"}],"title":"3.1. Changes to Document"}],"url":"https://infra.spec.whatwg.org/#assert"},
@@ -1432,7 +1442,6 @@ let dfnPanelData = {
 "85394472": {"dfnID":"85394472","dfnText":"Document","external":true,"refSections":[{"refs":[{"id":"ref-for-document"},{"id":"ref-for-document\u2460"},{"id":"ref-for-document\u2461"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-document\u2462"},{"id":"ref-for-document\u2463"},{"id":"ref-for-document\u2464"}],"title":"3.1. Changes to Document"}],"url":"https://dom.spec.whatwg.org/#document"},
 "857d5516": {"dfnID":"857d5516","dfnText":"client","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-request-client"}],"title":"5. Fetch Integration"}],"url":"https://fetch.spec.whatwg.org/#concept-request-client"},
 "860300d4": {"dfnID":"860300d4","dfnText":"implementation-defined","external":true,"refSections":[{"refs":[{"id":"ref-for-implementation-defined"},{"id":"ref-for-implementation-defined\u2460"}],"title":"6. Privacy considerations"},{"refs":[{"id":"ref-for-implementation-defined\u2461"}],"title":"7.2. Notification Abuse"}],"url":"https://infra.spec.whatwg.org/#implementation-defined"},
-"8a99da8e": {"dfnID":"8a99da8e","dfnText":"top-level-storage-access","external":true,"refSections":[{"refs":[{"id":"ref-for-permissiondef-top-level-storage-access"},{"id":"ref-for-permissiondef-top-level-storage-access\u2460"}],"title":"6. Privacy considerations"}],"url":"https://privacycg.github.io/requestStorageAccessFor/#permissiondef-top-level-storage-access"},
 "9c4c1e66": {"dfnID":"9c4c1e66","dfnText":"relevant settings object","external":true,"refSections":[{"refs":[{"id":"ref-for-relevant-settings-object"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-relevant-settings-object\u2460"},{"id":"ref-for-relevant-settings-object\u2461"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object"},
 "a1e6e861": {"dfnID":"a1e6e861","dfnText":"cookie","external":true,"refSections":[{"refs":[{"id":"ref-for-dom-document-cookie"}],"title":"3. The requestStorageAccessFor API"}],"url":"https://html.spec.whatwg.org/multipage/dom.html#dom-document-cookie"},
 "a72449dd": {"dfnID":"a72449dd","dfnText":"in parallel","external":true,"refSections":[{"refs":[{"id":"ref-for-in-parallel"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel"},
@@ -1440,6 +1449,7 @@ let dfnPanelData = {
 "aca22383": {"dfnID":"aca22383","dfnText":"consume user activation","external":true,"refSections":[{"refs":[{"id":"ref-for-consume-user-activation"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/interaction.html#consume-user-activation"},
 "ae2a6342": {"dfnID":"ae2a6342","dfnText":"top-level browsing context","external":true,"refSections":[{"refs":[{"id":"ref-for-top-level-browsing-context"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-browsing-context"},
 "b01b1359": {"dfnID":"b01b1359","dfnText":"opaque origin","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-origin-opaque"},{"id":"ref-for-concept-origin-opaque\u2460"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque"},
+"b065315c": {"dfnID":"b065315c","dfnText":"storage access headers retry check","external":true,"refSections":[{"refs":[{"id":"ref-for-perform-a-storage-access-retry-check"}],"title":"5. Fetch Integration"}],"url":"https://privacycg.github.io/storage-access-headers/#perform-a-storage-access-retry-check"},
 "b0d7f3c3": {"dfnID":"b0d7f3c3","dfnText":"USVString","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-USVString"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-idl-USVString\u2460"},{"id":"ref-for-idl-USVString\u2461"}],"title":"3.1. Changes to Document"}],"url":"https://webidl.spec.whatwg.org/#idl-USVString"},
 "b262501e": {"dfnID":"b262501e","dfnText":"reject","external":true,"refSections":[{"refs":[{"id":"ref-for-reject"},{"id":"ref-for-reject\u2460"},{"id":"ref-for-reject\u2461"},{"id":"ref-for-reject\u2462"},{"id":"ref-for-reject\u2463"},{"id":"ref-for-reject\u2464"},{"id":"ref-for-reject\u2465"},{"id":"ref-for-reject\u2466"},{"id":"ref-for-reject\u2467"}],"title":"3.1. Changes to Document"}],"url":"https://webidl.spec.whatwg.org/#reject"},
 "b2915302": {"dfnID":"b2915302","dfnText":"prompt","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-prompt"}],"title":"3.1. Changes to Document"}],"url":"https://w3c.github.io/permissions/#dfn-prompt"},
@@ -1456,10 +1466,12 @@ let dfnPanelData = {
 "dca2de17": {"dfnID":"dca2de17","dfnText":"DOMException","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-DOMException"},{"id":"ref-for-idl-DOMException\u2460"},{"id":"ref-for-idl-DOMException\u2461"},{"id":"ref-for-idl-DOMException\u2462"},{"id":"ref-for-idl-DOMException\u2463"},{"id":"ref-for-idl-DOMException\u2464"},{"id":"ref-for-idl-DOMException\u2465"},{"id":"ref-for-idl-DOMException\u2466"}],"title":"3.1. Changes to Document"}],"url":"https://webidl.spec.whatwg.org/#idl-DOMException"},
 "dom-document-requeststorageaccessfor": {"dfnID":"dom-document-requeststorageaccessfor","dfnText":"requestStorageAccessFor(requestedOrigin)","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor\u2460"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2461"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor\u2462"}],"title":"3.1. Changes to Document"},{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor\u2463"}],"title":"5. Fetch Integration"},{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor\u2464"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2465"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2466"}],"title":"6. Privacy considerations"},{"refs":[{"id":"ref-for-dom-document-requeststorageaccessfor\u2467"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2468"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2460\u24ea"},{"id":"ref-for-dom-document-requeststorageaccessfor\u2460\u2460"}],"title":"7. Security considerations"}],"url":"#dom-document-requeststorageaccessfor"},
 "dom-document-requeststorageaccessfor-requestedorigin-requestedorigin": {"dfnID":"dom-document-requeststorageaccessfor-requestedorigin-requestedorigin","dfnText":"requestedOrigin","external":false,"refSections":[],"url":"#dom-document-requeststorageaccessfor-requestedorigin-requestedorigin"},
+"e2a51d55": {"dfnID":"e2a51d55","dfnText":"active","external":true,"refSections":[{"refs":[{"id":"ref-for-extendableevent-active"}],"title":"5. Fetch Integration"},{"refs":[{"id":"ref-for-extendableevent-active\u2460"}],"title":"7.1. Subresource Requests"}],"url":"https://w3c.github.io/ServiceWorker/#extendableevent-active"},
 "e740d7e5": {"dfnID":"e740d7e5","dfnText":"name","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-name"}],"title":"4. Permissions Integration"}],"url":"https://w3c.github.io/permissions/#dfn-name"},
 "e99bd18e": {"dfnID":"e99bd18e","dfnText":"relevant global object","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-relevant-global"}],"title":"3.1. Changes to Document"},{"refs":[{"id":"ref-for-concept-relevant-global\u2460"}],"title":"5. Fetch Integration"}],"url":"https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global"},
 "f0482ed2": {"dfnID":"f0482ed2","dfnText":"same site","external":true,"refSections":[{"refs":[{"id":"ref-for-concept-site-same-site"},{"id":"ref-for-concept-site-same-site\u2460"},{"id":"ref-for-concept-site-same-site\u2461"}],"title":"1. Introduction"},{"refs":[{"id":"ref-for-concept-site-same-site\u2462"}],"title":"3. The requestStorageAccessFor API"},{"refs":[{"id":"ref-for-concept-site-same-site\u2463"},{"id":"ref-for-concept-site-same-site\u2464"}],"title":"3.1. Changes to Document"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#concept-site-same-site"},
 "f0811ff8": {"dfnID":"f0811ff8","dfnText":"img","external":true,"refSections":[{"refs":[{"id":"ref-for-the-img-element"}],"title":"3. The requestStorageAccessFor API"}],"url":"https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element"},
+"f6b9fd3a": {"dfnID":"f6b9fd3a","dfnText":"determine whether the user agent explicitly allows unpartitioned cookie access","external":true,"refSections":[{"refs":[{"id":"ref-for-determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access"}],"title":"3.1. Changes to Document"}],"url":"https://privacycg.github.io/storage-access/#determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access"},
 "fb4878d7": {"dfnID":"fb4878d7","dfnText":"denied","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-denied"}],"title":"3.1. Changes to Document"}],"url":"https://w3c.github.io/permissions/#dfn-denied"},
 "fb9bb722": {"dfnID":"fb9bb722","dfnText":"site","external":true,"refSections":[{"refs":[{"id":"ref-for-site"}],"title":"3. The requestStorageAccessFor API"}],"url":"https://html.spec.whatwg.org/multipage/browsers.html#site"},
 "first-party-site-context": {"dfnID":"first-party-site-context","dfnText":"first-party-site context","external":false,"refSections":[{"refs":[{"id":"ref-for-first-party-site-context"},{"id":"ref-for-first-party-site-context\u2460"},{"id":"ref-for-first-party-site-context\u2461"},{"id":"ref-for-first-party-site-context\u2462"}],"title":"3. The requestStorageAccessFor API"}],"url":"#first-party-site-context"},
@@ -1895,10 +1907,15 @@ let refsData = {
 "https://html.spec.whatwg.org/multipage/webappapis.html#secure-context": {"displayText":"secure context","export":true,"for_":[],"level":"1","normative":true,"shortname":"html","spec":"html","status":"current","text":"secure context","type":"dfn","url":"https://html.spec.whatwg.org/multipage/webappapis.html#secure-context"},
 "https://infra.spec.whatwg.org/#assert": {"displayText":"assert","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"assert","type":"dfn","url":"https://infra.spec.whatwg.org/#assert"},
 "https://infra.spec.whatwg.org/#implementation-defined": {"displayText":"implementation-defined","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"implementation-defined","type":"dfn","url":"https://infra.spec.whatwg.org/#implementation-defined"},
-"https://privacycg.github.io/requestStorageAccessFor/#permissiondef-top-level-storage-access": {"displayText":"top-level-storage-access","export":true,"for_":[],"level":"1","normative":true,"shortname":"requeststorageaccessfor","spec":"requeststorageaccessfor","status":"current","text":"top-level-storage-access","type":"permission","url":"https://privacycg.github.io/requestStorageAccessFor/#permissiondef-top-level-storage-access"},
+"https://privacycg.github.io/storage-access-headers/#perform-a-storage-access-retry-check": {"displayText":"storage access headers retry check","export":true,"for_":[],"level":"","normative":true,"shortname":"storage-access-headers","spec":"storage-access-headers","status":"anchor-block","text":"storage access headers retry check","type":"dfn","url":"https://privacycg.github.io/storage-access-headers/#perform-a-storage-access-retry-check"},
+"https://privacycg.github.io/storage-access-headers/#storage-access-status": {"displayText":"storage access status","export":true,"for_":[],"level":"","normative":true,"shortname":"storage-access-headers","spec":"storage-access-headers","status":"anchor-block","text":"storage access status","type":"dfn","url":"https://privacycg.github.io/storage-access-headers/#storage-access-status"},
+"https://privacycg.github.io/storage-access/#determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access": {"displayText":"determine whether the user agent explicitly allows unpartitioned cookie access","export":true,"for_":[],"level":"","normative":true,"shortname":"storage-access","spec":"storage-access","status":"anchor-block","text":"determine whether the user agent explicitly allows unpartitioned cookie access","type":"dfn","url":"https://privacycg.github.io/storage-access/#determine-whether-the-user-agent-explicitly-allows-unpartitioned-cookie-access"},
 "https://privacycg.github.io/storage-access/#dom-document-requeststorageaccess": {"displayText":"requestStorageAccess()","export":true,"for_":["Document"],"level":"1","normative":true,"shortname":"storage-access","spec":"storage-access","status":"current","text":"requestStorageAccess()","type":"method","url":"https://privacycg.github.io/storage-access/#dom-document-requeststorageaccess"},
+"https://privacycg.github.io/storage-access/#environment-has-storage-access": {"displayText":"has storage access","export":true,"for_":[],"level":"","normative":true,"shortname":"storage-access","spec":"storage-access","status":"anchor-block","text":"has storage access","type":"dfn","url":"https://privacycg.github.io/storage-access/#environment-has-storage-access"},
 "https://privacycg.github.io/storage-access/#sandbox-storage-access-by-user-activation-flag": {"displayText":"sandbox storage access by user activation flag","export":true,"for_":[],"level":"1","normative":true,"shortname":"storage-access","spec":"storage-access","status":"current","text":"sandbox storage access by user activation flag","type":"dfn","url":"https://privacycg.github.io/storage-access/#sandbox-storage-access-by-user-activation-flag"},
 "https://url.spec.whatwg.org/#concept-url-parser": {"displayText":"URL parser","export":true,"for_":[],"level":"1","normative":true,"shortname":"url","spec":"url","status":"current","text":"url parser","type":"dfn","url":"https://url.spec.whatwg.org/#concept-url-parser"},
+"https://w3c-fedid.github.io/FedCM/#determine-the-fedcm-site-connection-status": {"displayText":"determining the effective FedCM connection status","export":true,"for_":[],"level":"","normative":true,"shortname":"fedcm","spec":"fedcm","status":"anchor-block","text":"determining the effective fedcm connection status","type":"dfn","url":"https://w3c-fedid.github.io/FedCM/#determine-the-fedcm-site-connection-status"},
+"https://w3c.github.io/ServiceWorker/#extendableevent-active": {"displayText":"active","export":true,"for_":["ExtendableEvent"],"level":"1","normative":true,"shortname":"service-workers","spec":"service-workers","status":"current","text":"active","type":"dfn","url":"https://w3c.github.io/ServiceWorker/#extendableevent-active"},
 "https://w3c.github.io/permissions/#dfn-denied": {"displayText":"denied","export":true,"for_":["permission"],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"denied","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-denied"},
 "https://w3c.github.io/permissions/#dfn-getting-the-current-permission-state": {"displayText":"getting the current permission state","export":true,"for_":[],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"getting the current permission state","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-getting-the-current-permission-state"},
 "https://w3c.github.io/permissions/#dfn-granted": {"displayText":"granted","export":true,"for_":["permission"],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"granted","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-granted"},
